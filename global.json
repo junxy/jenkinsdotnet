@@ -1,0 +1,6 @@
+{
+    "projects": [
+        "JenkinsDotNet",
+        "JenkinsDotNet.Tests"
+    ]
+}

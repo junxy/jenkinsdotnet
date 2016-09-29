@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0-*",
+  "testRunner": "mstest",
+
+  "dependencies": {
+  },
+
+  "frameworks": {
+    "net451": {
+      "dependencies": {
+        "dotnet-test-mstest": "1.1.1-*",
+        "MSTest.TestFramework": "1.0.4-*",
+        "JenkinsDotNet": {
+          "target": "project"
+        },
+        "RhinoMocks": "3.6.1"
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0-*",
+  "authors": [ "xuyijun" ],
+  "packOptions": {
+    "projectUrl": "https://jenkinsdotnet.codeplex.com",
+    "summary": "summary",
+    "releaseNotes": "released"
+  },
+  "description": "Jenkins.NET is an open-source portable class library for retrieving information from the Jenkins continuous integration server (http://www.jenkins-ci.org). It wraps the XML-flavoured API with asynchronous calls",
+
+  "dependencies": {
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50",
+      "dependencies": {
+        "System.Reflection.TypeExtensions": "4.1.0",
+        "NETStandard.Library": "1.6.0"
+      }
+    },
+    "net45": {
+      "dependencies": {
+        "System.Net.Http": "4.0.0"
+      },
+      "frameworkAssemblies": {
+        "System.Xml.Linq": ""
+      }
+    }
+  }
+}
