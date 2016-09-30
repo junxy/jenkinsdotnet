@@ -13,7 +13,8 @@
         "JenkinsDotNet": {
           "target": "project"
         },
-        "RhinoMocks": "3.6.1"
+        "RhinoMocks": "3.6.1",
+        "Newtonsoft.Json": "9.0.1"
       }
     }
   }

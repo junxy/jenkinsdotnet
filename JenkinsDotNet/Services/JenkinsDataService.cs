@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -47,12 +48,20 @@ namespace JenkinsDotNet.Services
         /// <param name="parameters">Any parameters required for the specified URL</param>
         /// <returns>Task representing the retrieval of requested data</returns>
         public async Task<T> RequestAsync<T>(URL component, string baseUrl, string userName, string apiKey,
-                                             params object[] parameters) where T : JenkinsModel<T>, new()
+            params object[] parameters) where T : JenkinsModel<T>, new()
         {
             HttpRequestMessage request = ComposeMessage(baseUrl + component.Url(parameters), userName, apiKey);
             Task<HttpResponseMessage> task = SendMessage(request);
-            Task<string> readTask = (await task).Content.ReadAsStringAsync();
-            return await readTask.ContinueWith(task1 => GetObject<T>(XElement.Parse(task1.Result)));
+
+            var statusCode = task.Result.StatusCode;
+            if (statusCode == HttpStatusCode.OK)
+            {
+                Task<string> readTask = (await task).Content.ReadAsStringAsync();
+                return await readTask.ContinueWith(task1 => GetObject<T>(XElement.Parse(task1.Result)));
+            }
+
+            throw new HttpRequestException(
+                $"Url `{baseUrl + component.Url(parameters)}` Response Http Status Code: {statusCode}");
         }
 
         private static HttpRequestMessage ComposeMessage(string url, string userName, string apiKey,
